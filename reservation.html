@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Table Reservation | MOMO Restaurant</title>
+<meta name="description" content="Reserve a table at MOMO Restaurant. Book online instantly with confirmation.">
+<meta name="keywords" content="restaurant reservation, MOMO restaurant, table booking">
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<!-- Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+(function(){
+  emailjs.init("YOUR_PUBLIC_KEY");
+})();
+</script>
+
+<style>
+:root{
+  --neon:#00ffff;
+  --dark:#070707;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:#f6f7fb;
+  padding-top:72px;
+}
+
+/* NAVBAR */
+.navbar{
+  background:#050505;
+}
+.navbar-brand,
+.nav-link{
+  color:#ddd!important;
+}
+.nav-link.active,
+.nav-link:hover{
+  color:var(--neon)!important;
+  text-shadow:0 0 8px var(--neon);
+}
+
+/* TITLE */
+.section-title{
+  text-align:center;
+  margin-bottom:40px;
+}
+.section-title span{
+  color:var(--neon);
+  text-shadow:0 0 15px var(--neon);
+}
+
+/* CARD */
+.reservation-card{
+  background:#fff;
+  border-radius:20px;
+  padding:35px;
+  box-shadow:0 25px 60px rgba(0,0,0,.12);
+  opacity:0;
+  transform:translateY(40px);
+  transition:.8s ease;
+}
+.reservation-card.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* BUTTON */
+.btn-neon{
+  border:2px solid var(--neon);
+  background:transparent;
+  color:#000;
+  padding:14px;
+  border-radius:40px;
+  font-weight:600;
+  transition:.3s;
+}
+.btn-neon:hover{
+  background:var(--neon);
+  box-shadow:0 0 25px var(--neon);
+  transform:translateY(-3px);
+}
+
+/* INFO */
+.reservation-info{
+  background:linear-gradient(135deg,#050505,#111);
+  color:#fff;
+  border-radius:20px;
+  padding:35px;
+}
+.reservation-info i{
+  color:var(--neon);
+  margin-right:10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="index.html">MOMO Kitchens</a>
+    <ul class="navbar-nav ms-auto d-none d-lg-flex">
+      <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+      <li class="nav-item"><a class="nav-link active" href="reservation.html">Reservation</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- RESERVATION -->
+<section class="py-5">
+  <div class="container">
+
+    <div class="section-title">
+      <h1>Reserve a <span>Table</span></h1>
+      <p class="text-muted">Book your dining experience in seconds</p>
+    </div>
+
+    <div class="row g-4">
+      
+      <!-- FORM -->
+      <div class="col-lg-7">
+        <div class="reservation-card" id="reserveCard">
+          <form id="reservationForm">
+
+            <div class="row g-3">
+              <div class="col-md-6 form-floating">
+                <input type="text" class="form-control" id="fname" required>
+                <label>First Name</label>
+              </div>
+              <div class="col-md-6 form-floating">
+                <input type="text" class="form-control" id="lname" required>
+                <label>Last Name</label>
+              </div>
+            </div>
+
+            <div class="form-floating mt-3">
+              <input type="email" class="form-control" id="email" required>
+              <label>Email Address</label>
+            </div>
+
+            <div class="form-floating mt-3">
+              <input type="tel" class="form-control" id="phone" required>
+              <label>Phone Number</label>
+            </div>
+
+            <div class="row g-3 mt-2">
+              <div class="col-md-4 form-floating">
+                <input type="date" class="form-control" id="date" required>
+                <label>Date</label>
+              </div>
+              <div class="col-md-4 form-floating">
+                <input type="time" class="form-control" id="time" required>
+                <label>Time</label>
+              </div>
+              <div class="col-md-4 form-floating">
+                <select class="form-select" id="guests" required>
+                  <option value="">Guests</option>
+                  <option>1</option><option>2</option><option>3</option>
+                  <option>4</option><option>5+</option>
+                </select>
+                <label>Guests</label>
+              </div>
+            </div>
+
+            <button class="btn btn-neon w-100 mt-4">
+              <i class="fas fa-calendar-check me-2"></i>Confirm Reservation
+            </button>
+
+          </form>
+        </div>
+      </div>
+
+      <!-- INFO -->
+      <div class="col-lg-5">
+        <div class="reservation-info">
+          <h4>Reservation Info</h4>
+          <p><i class="fas fa-clock"></i>10:00 AM – 11:00 PM</p>
+          <p><i class="fas fa-phone"></i>+971 55 915 1072</p>
+          <p><i class="fas fa-location-dot"></i>Sharjah, UAE</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="bg-dark text-light text-center py-4">
+  &copy; 2026 MOMO. All Rights Reserved.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// Reveal animation
+window.onload = () => document.getElementById('reserveCard').classList.add('show');
+
+// Reservation Logic
+document.getElementById('reservationForm').addEventListener('submit', function(e){
+  e.preventDefault();
+
+  const date = dateInput = document.getElementById('date').value;
+  const time = document.getElementById('time').value;
+  const hour = parseInt(time.split(':')[0]);
+
+  if(hour < 10 || hour >= 23){
+    alert("Reservations allowed 10AM – 11PM");
+    return;
+  }
+
+  const reservations = JSON.parse(localStorage.getItem('momoReservations')) || [];
+  const slot = reservations.filter(r => r.date === date && r.time === time);
+  if(slot.length >= 5){
+    alert("This time slot is fully booked");
+    return;
+  }
+
+  const reservation = {
+    id: Date.now(),
+    name: fname.value + " " + lname.value,
+    email: email.value,
+    phone: phone.value,
+    date, time,
+    guests: guests.value
+  };
+
+  reservations.push(reservation);
+  localStorage.setItem('momoReservations', JSON.stringify(reservations));
+
+  // WhatsApp
+  window.open(`https://wa.me/971559151072?text=${encodeURIComponent(
+    `Reservation Confirmed 🍽️\n${reservation.name}\n${date} ${time}\nGuests: ${reservation.guests}`
+  )}`);
+
+  // EmailJS
+  emailjs.send("service_id","template_id", reservation);
+
+  alert("Reservation confirmed!");
+  this.reset();
+});
+</script>
+
+</body>
+</html>

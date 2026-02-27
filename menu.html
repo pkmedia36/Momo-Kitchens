@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu – MOMO Restaurant</title>
+
+<!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#ff0057;
+  --dark:#0b0b0b;
+  --card:#141414;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+:root {
+  --neon:#0ff;
+}
+
+.neon-navbar .nav-link,
+.neon-navbar .navbar-brand {
+  position: relative;
+  color: #fff;
+  transition: 0.3s;
+}
+.neon-navbar .nav-link:hover,
+.neon-navbar .nav-link.active,
+.neon-navbar .navbar-brand:hover {
+  color: var(--neon);
+  text-shadow: 0 0 5px var(--neon), 0 0 10px var(--neon), 0 0 20px var(--neon);
+}
+
+/* Neon Pulse Animation */
+@keyframes neonPulse {
+  0%,100% { text-shadow:0 0 5px var(--neon),0 0 10px var(--neon); }
+  50% { text-shadow:0 0 20px var(--neon),0 0 30px var(--neon); }
+}
+.neon-navbar .nav-link:hover,
+.neon-navbar .navbar-brand:hover {
+  animation: neonPulse 1.5s infinite;
+}
+
+/* Ripple Effect on Hover */
+.nav-link::after {
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0; left:0;
+  border-radius:6px;
+  background:rgba(0,255,255,0.1);
+  opacity:0;
+  transform:scale(0);
+  transition: transform 0.5s, opacity 0.5s;
+  z-index:-1;
+}
+.nav-link:hover::after {
+  opacity:1;
+  transform:scale(1.2);
+}
+
+
+
+
+/* Mobile Slide-in */
+@media (max-width:992px){
+  .slide-in {
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+  }
+  .navbar-collapse.show.slide-in {
+    transform: translateX(0);
+    background:#111;
+    padding:20px;
+    border-radius:0 0 16px 16px;
+  }
+  
+}
+
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:#000;
+  color:#fff;
+}
+
+/* ================= HERO VIDEO ================= */
+.hero-video{
+  position:relative;
+  height:80vh;
+  overflow:hidden;
+}
+.hero-video video{
+  position:absolute;
+  top:50%;
+  left:50%;
+  min-width:100%;
+  min-height:100%;
+  transform:translate(-50%,-50%);
+  object-fit:cover;
+}
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.65);
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.hero-content h1{
+  font-size:60px;
+  font-weight:700;
+  text-shadow:0 0 15px var(--primary);
+}
+.hero-content p{
+  font-size:20px;
+  opacity:.85;
+}
+
+/* ================= CATEGORY BUTTONS ================= */
+.category-btn{
+  border:1px solid var(--primary);
+  color:#fff;
+  background:transparent;
+  font-weight:600;
+  transition:.3s;
+}
+.category-btn:hover,
+.category-btn.active{
+  background:var(--primary);
+  box-shadow:0 0 15px var(--primary);
+  color:#fff;
+}
+
+/* ================= MENU CARDS ================= */
+.menu-card{
+  background:var(--card);
+  border-radius:16px;
+  overflow:hidden;
+  transition:.4s;
+  height:100%;
+}
+.menu-card img{
+  height:220px;
+  width:100%;
+  object-fit:cover;
+  transition:.4s;
+}
+.menu-card:hover img{
+  transform:scale(1.1);
+}
+.menu-card:hover{
+  transform:translateY(-12px);
+  box-shadow:0 0 30px rgba(255,0,87,.4);
+}
+.menu-info{
+  padding:25px;
+  text-align:center;
+}
+.menu-info h5{
+  font-weight:600;
+}
+.price{
+  color:var(--primary);
+  font-weight:700;
+  font-size:18px;
+}
+.add-cart{
+  border:1px solid var(--primary);
+  color:#fff;
+  background:transparent;
+  transition:.3s;
+}
+.add-cart:hover{
+  background:var(--primary);
+  box-shadow:0 0 12px var(--primary);
+}
+
+/* ================= ANIMATION ================= */
+.fade-in{
+  animation:fadeUp .6s ease forwards;
+}
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(30px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* ================= FOOTER ================= */
+footer{
+  background:#000;
+  border-top:1px solid rgba(255,255,255,.1);
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top neon-navbar">
+  <div class="container">
+    <a class="navbar-brand neon-text" href="index.html">MOMO Kitchens</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"
+      aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse slide-in" id="nav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="home3.html">Home</a></li>
+        
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>
+        <li class="nav-item"><a class="nav-link" href="team.html">Team</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO SECTION ================= -->
+<section class="hero-video">
+  <video autoplay muted loop>
+    <source src="assests/videos/fried beef -rice.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div>
+      <h1>Our Signature Menu</h1>
+      <p>Crafted with passion, served with flavor</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MENU SECTION ================= -->
+<section class="py-5">
+  <div class="container">
+
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Explore Our Menu</h2>
+      <p class="opacity-75">Choose your favorite dish</p>
+    </div>
+
+    <!-- Categories -->
+    <div class="row mb-5 g-3 text-center">
+      <div class="col-md-3"><button class="btn category-btn w-100 active" data-category="all">All</button></div>
+      <div class="col-md-3"><button class="btn category-btn w-100" data-category="pizza">Pizza</button></div>
+      <div class="col-md-3"><button class="btn category-btn w-100" data-category="burger">Burger</button></div>
+      <div class="col-md-3"><button class="btn category-btn w-100" data-category="coffee">Coffee</button></div>
+    </div>
+
+    <!-- Menu Grid -->
+    <div class="row g-4" id="menu">
+
+      <!-- CARD -->
+      <div class="col-md-4 menu-item fade-in" data-category="pizza">
+        <div class="menu-card">
+          <img src="assests/images/italiana pizza.jfif">
+          <div class="menu-info">
+            <h5>Italian Pizza</h5>
+            <div class="price">$37.99</div>
+            <button class="btn add-cart mt-3">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 menu-item fade-in" data-category="pizza">
+        <div class="menu-card">
+          <img src="assests/images/vegge-pizza.jfif">
+          <div class="menu-info">
+            <h5>Veggie Pizza</h5>
+            <div class="price">$20.99</div>
+            <button class="btn add-cart mt-3">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 menu-item fade-in" data-category="pizza">
+        <div class="menu-card">
+          <img src="assests/images/sausage -pizza.webp">
+          <div class="menu-info">
+            <h5>Sausage Pizza</h5>
+            <div class="price">$44.99</div>
+            <button class="btn add-cart mt-3">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 menu-item fade-in" data-category="pizza">
+        <div class="menu-card">
+          <img src="assests/images/cheese - pizza.jfif">
+          <div class="menu-info">
+            <h5>Cheese Pizza</h5>
+            <div class="price">$26.99</div>
+            <button class="btn add-cart mt-3">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 menu-item fade-in" data-category="pizza">
+        <div class="menu-card">
+          <img src="assests/images/meat-pizza.jfif">
+          <div class="menu-info">
+            <h5>Meat Lovers Pizza</h5>
+            <div class="price">$40.99</div>
+            <button class="btn add-cart mt-3">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 menu-item fade-in" data-category="pizza">
+        <div class="menu-card">
+          <img src="assests/images/CHEESE-PIZZA.jfif">
+          <div class="menu-info">
+            <h5>Cheeseburger Pizza</h5>
+            <div class="price">$28.99</div>
+            <button class="btn add-cart mt-3">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+       <div class="col-md-4 menu-item fade-in" data-category="pizza">
+        <div class="menu-card">
+          <img src="assests/images/veggie pizza.jfif">
+          <div class="menu-info">
+            <h5>Fruits Pizza</h5>
+            <div class="price">$35.99</div>
+            <button class="btn add-cart mt-3">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+       <div class="col-md-4 menu-item fade-in" data-category="pizza">
+        <div class="menu-card">
+          <img src="assests/images/pepero-1-1.jfif">
+          <div class="menu-info">
+            <h5>max Pizza</h5>
+            <div class="price">$19.99</div>
+            <button class="btn add-cart mt-3">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+       <div class="col-md-4 menu-item fade-in" data-category="pizza">
+        <div class="menu-card">
+          <img src="assests/images/margheritta piZZa.jfif">
+          <div class="menu-info">
+            <h5>Maggerit Pizza</h5>
+            <div class="price">$30.99</div>
+            <button class="btn add-cart mt-3">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 menu-item fade-in" data-category="burger">
+        <div class="menu-card">
+          <img src="assests/images/zigger-sandwich-1.jfif">
+          <div class="menu-info">
+            <h5>Zingger sANDWICH</h5>
+            <div class="price">$18.99</div>
+            <button class="btn add-cart mt-3">
+              <a href="cart.html"></a>Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 menu-item fade-in" data-category="burger">
+        <div class="menu-card">
+          <img src="assests/images/double-buger.jfif">
+          <div class="menu-info">
+            <h5>Zingger Burger</h5>
+            <div class="price">$24.99</div>
+            <button class="btn add-cart mt-3">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 menu-item fade-in" data-category="burger">
+        <div class="menu-card">
+          <img src="assests/images/paneer Burgerr-1.jfif">
+          <div class="menu-info">
+            <h5>Paneer Burger</h5>
+            <div class="price">$15.99</div>
+            <button class="btn add-cart mt-3">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 menu-item fade-in" data-category="burger">
+        <div class="menu-card">
+          <img src="assests/images/sandwich-1.jfif">
+          <div class="menu-info">
+            <h5>Classic Burger</h5>
+            <div class="price">$25.99</div>
+            <button class="btn add-cart mt-3">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+       <div class="col-md-4 menu-item fade-in" data-category="burger">
+        <div class="menu-card">
+          <img src="assests/images/sandwich-club-2.jfif">
+          <div class="menu-info">
+            <h5>Sandwich club</h5>
+            <div class="price">$19.99</div>
+            <button class="btn add-cart mt-3">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+       <div class="col-md-4 menu-item fade-in" data-category="burger">
+        <div class="menu-card">
+          <img src="assests/images/zingger -burger-1.jfif">
+          <div class="menu-info">
+            <h5>zigger Burger</h5>
+            <div class="price">$30.99</div>
+            <button class="btn add-cart mt-3">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 menu-item fade-in" data-category="coffee">
+        <div class="menu-card">
+          <img src="assests/images/speciality coffee.jfif">
+          <div class="menu-info">
+            <h5>Cappuccino</h5>
+            <div class="price">$27.99</div>
+            <button class="btn add-cart mt-3">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="text-center py-4">
+  <p class="mb-0">© 2026 MOMO Kitchens. All Rights Reserved.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+const btns = document.querySelectorAll('.category-btn');
+const items = document.querySelectorAll('.menu-item');
+
+btns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    btns.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.category;
+
+    items.forEach(item=>{
+      item.style.display = (cat==='all'||item.dataset.category===cat)
+        ? 'block':'none';
+    });
+  });
+});
+
+// Grab all add-cart buttons
+const addCartButtons = document.querySelectorAll('.add-cart');
+
+addCartButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const card = button.closest('.menu-card');
+    const itemName = card.querySelector('h5').innerText;
+    const itemPrice = parseFloat(card.querySelector('.price').dataset.price);
+    const itemImg = card.querySelector('img').src;
+
+    // Get cart from localStorage or create new
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Add item to cart
+    cart.push({ name: itemName, price: itemPrice, img: itemImg });
+
+    // Save back to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+   
+
+    // Redirect to cart page (optional)
+    // window.location.href = 'cart.html';
+  });
+});
+</script>
+
+</body>
+</html>

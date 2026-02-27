@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gallery | MOMO Restaurant</title>
+<meta name="description" content="Explore MOMO’s food gallery – premium dishes, drinks, interiors, and team moments.">
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<!-- Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<!-- Lightbox -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
+
+<style>
+:root{
+  --neon:#00ffff;
+  --dark:#050505;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:#f6f7fb;
+  padding-top:72px;
+}
+
+/* ===== NAVBAR ===== */
+.navbar{
+  background:#050505;
+}
+.navbar-brand,
+.nav-link{
+  color:#ddd!important;
+}
+.nav-link.active,
+.nav-link:hover{
+  color:var(--neon)!important;
+  text-shadow:0 0 8px var(--neon);
+}
+
+/* ===== TITLE ===== */
+.section-title{
+  text-align:center;
+  margin-bottom:40px;
+}
+.section-title h1{
+  font-weight:700;
+}
+.section-title h1 span{
+  color:var(--neon);
+  text-shadow:0 0 15px var(--neon);
+}
+
+/* ===== FILTER BUTTONS ===== */
+.filter-btn{
+  border:1px solid var(--neon);
+  background:transparent;
+  color:#111;
+  padding:8px 22px;
+  border-radius:30px;
+  margin:5px;
+  transition:.3s;
+}
+.filter-btn.active,
+.filter-btn:hover{
+  background:var(--neon);
+  color:#000;
+  box-shadow:0 0 20px var(--neon);
+}
+
+/* ===== GALLERY ===== */
+.gallery-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:18px;
+  box-shadow:0 15px 40px rgba(0,0,0,.15);
+  opacity:0;
+  transform:translateY(40px);
+  transition:.6s ease;
+}
+.gallery-card.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.gallery-card img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  transition:.5s;
+}
+
+.gallery-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  transition:.4s;
+}
+.gallery-overlay i{
+  font-size:32px;
+  color:var(--neon);
+  text-shadow:0 0 20px var(--neon);
+}
+
+.gallery-card:hover img{
+  transform:scale(1.15);
+}
+.gallery-card:hover .gallery-overlay{
+  opacity:1;
+}
+.gallery-card:hover{
+  box-shadow:0 0 25px rgba(0,255,255,.5);
+}
+
+/* Hide */
+.hide{
+  display:none;
+}
+
+/* Footer */
+footer{
+  background:#050505;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="index.html">MOMO Kitchens</a>
+  </div>
+</nav>
+
+<!-- GALLERY -->
+<section class="py-5">
+  <div class="container">
+
+    <div class="section-title">
+      <h1>Our <span>Gallery</span></h1>
+      <p class="text-muted">Food • Drinks • Interior • Team</p>
+    </div>
+
+    <!-- FILTER -->
+    <div class="text-center mb-4">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="food">Food</button>
+      <button class="filter-btn" data-filter="drinks">Drinks</button>
+      <button class="filter-btn" data-filter="interior">Interior</button>
+      <button class="filter-btn" data-filter="team">Team</button>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- FOOD -->
+        <div class="col-md-4 gallery-item team">
+        <div class="gallery-card">
+          <a href="assests/images/Boss-Momo.JPG" data-lightbox="gallery">
+            <img src="assests/images/Boss-Momo.JPG" alt="Burger Meal">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-4 gallery-item team">
+        <div class="gallery-card">
+          <a href="assests/images/C.E.O.JPG" data-lightbox="gallery">
+            <img src="assests/images/C.E.O.JPG" alt="Burger Meal">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-4 gallery-item food">
+        <div class="gallery-card">
+          <a href="assests/images/strawberries-shake.avif" data-lightbox="gallery">
+            <img src="assests/images/magerit pizza.webp" alt="MOMO Pizza">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-4 gallery-item drinks">
+        <div class="gallery-card">
+          <a href="assests/images/special coffee.jfif" data-lightbox="gallery">
+            <img src="assests/images/cheeseburger beef.jfif" alt="Restaurant Interior">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-4 gallery-item interior">
+        <div class="gallery-card">
+          <a href="assests/images/classic cheeseburger beef.jfif" data-lightbox="gallery">
+            <img src="assests/images/cheeseburger beef.jfif" alt="Restaurant Interior">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-4 gallery-item team">
+        <div class="gallery-card">
+          <a href="assests/images/cheeseburger beef.jfif" data-lightbox="gallery">
+            <img src="assests/images/cheerful-chef.avif" alt="MOMO Team">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-4 gallery-item food">
+        <div class="gallery-card">
+          <a href="assets/images/gallery5.jpg" data-lightbox="gallery">
+            <img src="assests/images/cheeseburger beef.jfif" alt="Burger Meal">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </a>
+        </div>
+      </div>
+
+
+
+
+      <div class="col-md-4 gallery-item interior">
+        <div class="gallery-card">
+          <a href="assests/images/srawberry cake.avif" data-lightbox="gallery">
+            <img src="assests/images/chocolate lava cake.jfif" alt="Ambience">
+            <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="text-light text-center py-4">
+  &copy; 2026 MOMO KITCHENS. All Rights Reserved.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+    }
+  });
+},{threshold:.2});
+
+document.querySelectorAll('.gallery-card').forEach(card=>{
+  observer.observe(card);
+});
+
+// Filtering
+const buttons = document.querySelectorAll('.filter-btn');
+const items = document.querySelectorAll('.gallery-item');
+
+buttons.forEach(btn=>{
+  btn.onclick = ()=>{
+    buttons.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const filter = btn.dataset.filter;
+    items.forEach(item=>{
+      item.classList.toggle('hide', filter !== 'all' && !item.classList.contains(filter));
+    });
+  };
+});
+</script>
+
+</body>
+</html>

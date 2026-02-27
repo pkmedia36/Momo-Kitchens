@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home 4 – Momo Online Food Ordering</title>
+
+<!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body { font-family: 'Poppins', sans-serif; padding-top: 70px; background:#0b0b0b; color:#fff; }
+.navbar { transition:0.3s; }
+
+/* Active Page Highlight */
+.nav-link.active { color:#0ff !important; text-shadow:0 0 5px #0ff; }
+
+/* Hero Section with Neon Pulse */
+.hero {
+  background: url('assets/images/hero4.jpg') no-repeat center center/cover;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+.hero::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.6);
+  animation: neonPulse 2s infinite;
+}
+.hero h1, .hero p { position:relative; z-index:2; text-shadow:0 0 10px #0ff; }
+.hero h1 { font-size:3rem; font-weight:700; margin-bottom:20px; }
+.hero p { font-size:1.2rem; margin-bottom:30px; }
+.hero .btn { position:relative; z-index:2; padding:10px 30px; font-size:1.1rem; transition:0.3s; }
+.hero .btn:hover { transform: translateY(-5px); box-shadow:0 0 15px #0ff; }
+
+/* Neon Pulse Animation */
+@keyframes neonPulse {
+  0%,100% { box-shadow:0 0 20px #0ff inset; }
+  50% { box-shadow:0 0 50px #0ff inset; }
+}
+
+/* Promotional Banners */
+.promo-card { border-radius: 12px; overflow: hidden; position: relative; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; }
+.promo-card:hover { transform: translateY(-5px); box-shadow:0 0 15px #0ff; }
+.promo-card img { width:100%; height:250px; object-fit:cover; }
+.promo-card .promo-text { position:absolute; bottom:20px; left:20px; color:#fff; background: rgba(0,0,0,.5); padding:10px 20px; border-radius:8px; }
+
+/* Top Chefs Section */
+.section-title { text-align:center; margin-bottom:50px; }
+.chef-card { border-radius:12px; overflow:hidden; box-shadow:0 5px 20px rgba(0,255,255,0.2); transition: transform 0.3s, box-shadow 0.3s; text-align:center; background:#111; }
+.chef-card:hover { transform:translateY(-5px); box-shadow:0 0 20px #0ff; }
+.chef-card img { width:100%; height:250px; object-fit:cover; border-bottom: 2px solid #0ff; }
+.chef-card h5 { font-weight:600; margin-top:15px; color:#0ff; text-shadow:0 0 5px #0ff; }
+.chef-card p { font-size:0.95rem; color:#ccc; }
+
+/* Footer */
+footer { background:#111; color:#fff; text-align:center; padding:20px 0; }
+
+/* Smooth Fade-in */
+.fade-in { opacity:0; transform:translateY(20px); animation: fadeIn 1s forwards; }
+.fade-in:nth-child(1) { animation-delay:0.2s; }
+.fade-in:nth-child(2) { animation-delay:0.4s; }
+.fade-in:nth-child(3) { animation-delay:0.6s; }
+.fade-in:nth-child(4) { animation-delay:0.8s; }
+
+@keyframes fadeIn { to { opacity:1; transform:translateY(0); } }
+
+/* Ripple Effect for Promo Cards */
+.promo-card::after {
+  content:"";
+  position:absolute; inset:0;
+  border-radius:12px;
+  background:rgba(0,255,255,0.1);
+  opacity:0;
+  transition:opacity 0.3s;
+}
+.promo-card:hover::after { opacity:1; }
+
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-dark shadow-sm fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-white" href="index.html">MOMO KITCHENS</a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="home3.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+        <li class="nav-item"><a class="nav-link" href="team.html">Team</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero d-flex flex-column justify-content-center">
+  <div class="container fade-in">
+    <h1>Delicious Meals Await</h1>
+    <p>Order your favorite dishes and enjoy exclusive offers</p>
+    <a href="menu-details.html" class="btn btn-outline-info btn-lg">Order Now</a>
+  </div>
+</section>
+
+<!-- Promotional Banners -->
+<section class="section py-5">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>Special Promotions</h2>
+      <p>Grab these amazing deals today!</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4 fade-in">
+        <div class="promo-card">
+          <img src="assests/images/sausage -pizza.webp" alt="Promo 1">
+          <div class="promo-text">
+            <h5>Pizza Combo</h5>
+            <p>Buy 1 Get 1 Free</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 fade-in">
+        <div class="promo-card">
+          <img src="assests/images/burger with chips.avif" alt="Promo 2">
+          <div class="promo-text">
+            <h5>Burger Delight</h5>
+            <p>20% Off</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 fade-in">
+        <div class="promo-card">
+          <img src="assests/images/coffe-lutos.avif" alt="Promo 3">
+          <div class="promo-text">
+            <h5>Coffee Lovers</h5>
+            <p>Buy 2 Get 1 Free</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Top Chefs Section -->
+<section class="section py-5 bg-dark">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>Meet Our Top Chefs</h2>
+      <p>The masters behind our delicious food</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-3 fade-in">
+        <div class="chef-card">
+          <img src="assests/images/cheerful-chef.avif" alt="Chef 1">
+          <h5>Chef Antonio</h5>
+          <p>Italian Cuisine Expert</p>
+        </div>
+      </div>
+      <div class="col-md-3 fade-in">
+        <div class="chef-card">
+          <img src="assests/images/chef-lady.avif" alt="Chef 2">
+          <h5>Chef Maria</h5>
+          <p>Pastry Specialist</p>
+        </div>
+      </div>
+      <div class="col-md-3 fade-in">
+        <div class="chef-card">
+          <img src="assests/images/chef-anto.avif" alt="Chef 3">
+          <h5>Chef John</h5>
+          <p>Burger & Grill</p>
+        </div>
+      </div>
+      <div class="col-md-3 fade-in">
+        <div class="chef-card">
+          <img src="assests/images/chef-woman.avif" alt="Chef 4">
+          <h5>Chef Emily</h5>
+          <p>Barista & Drinks</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer bg-dark text-light text-center py-4 fade-in">
+  <p>&copy; 2026 MOMO. All Rights Reserved.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

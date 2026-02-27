@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu Details – MOMO</title>
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --neon:#00f7ff;
+  --dark:#070707;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background: radial-gradient(circle at top,#0d0d0d,#000);
+  color:#fff;
+  padding-top:70px;
+}
+
+/* NAVBAR */
+.navbar{
+  background:#050505;
+}
+.navbar .nav-link{
+  color:#bbb !important;
+}
+.navbar .nav-link:hover,
+.navbar .nav-link.active{
+  color:var(--neon)!important;
+  text-shadow:0 0 10px var(--neon);
+}
+
+/* SECTION TITLE */
+.section-title h2{
+  font-weight:700;
+  color:var(--neon);
+  text-shadow:0 0 15px var(--neon);
+}
+.section-title p{
+  color:#aaa;
+}
+
+/* CAROUSEL */
+.carousel img{
+  height:420px;
+  object-fit:cover;
+  border-radius:20px;
+  box-shadow:0 0 25px rgba(0,247,255,.3);
+}
+
+/* DISH INFO */
+.dish-info{
+  background:rgba(255,255,255,.05);
+  backdrop-filter:blur(15px);
+  border-radius:25px;
+  padding:35px;
+  box-shadow:0 0 30px rgba(0,247,255,.15);
+  animation:fadeUp .8s ease;
+}
+.dish-info h2{
+  color:var(--neon);
+  font-weight:700;
+}
+.price{
+  font-size:1.5rem;
+  color:#0ff;
+  font-weight:600;
+}
+
+/* BUTTON */
+.neon-btn{
+  border:2px solid var(--neon);
+  background:transparent;
+  color:var(--neon);
+  padding:12px 30px;
+  border-radius:50px;
+  font-weight:600;
+  transition:.3s;
+}
+.neon-btn:hover{
+  background:var(--neon);
+  color:#000;
+  box-shadow:0 0 25px var(--neon);
+  transform:translateY(-3px);
+}
+
+/* RELATED DISHES */
+.menu-card{
+  background:rgba(255,255,255,.05);
+  border:none;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 0 20px rgba(0,247,255,.1);
+  transform:translateY(40px);
+  opacity:0;
+  transition:.6s;
+}
+.menu-card img{
+  height:220px;
+  object-fit:cover;
+}
+.menu-card:hover{
+  transform:translateY(-10px) scale(1.03);
+  box-shadow:0 0 35px var(--neon);
+}
+.menu-card h5{
+  color:#0ff;
+}
+
+/* FOOTER */
+footer{
+  background:#050505;
+  color:#aaa;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px);}
+  to{opacity:1;transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top shadow">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-light" href="index.html">MOMO</a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="menu.html">Menu</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- DISH DETAILS -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+
+      <!-- IMAGE CAROUSEL -->
+      <div class="col-md-6">
+        <div id="dishCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="assests/images/italy-pizza.jfif" class="w-100">
+            </div>
+            <div class="carousel-item">
+              <img src="assests/images/pizza-1.jfif" class="w-100">
+            </div>
+            <div class="carousel-item">
+              <img src="assests/images/chees-pizza.jfif" class="w-100">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INFO -->
+      <div class="col-md-6">
+        <div class="dish-info">
+          <h2>Italian Signature Pizza</h2>
+          <p class="price">$12.99</p>
+          <p>Authentic Italian pizza baked with premium mozzarella, fresh basil, and rich tomato sauce.</p>
+          <p><strong>Ingredients:</strong> Mozzarella, Basil, Olive Oil, Tomato Sauce</p>
+          <p><strong>Nutrition:</strong> 320 kcal · 12g Protein · 40g Carbs</p>
+          <button class="neon-btn mt-3">
+            <i class="fas fa-cart-plus"></i> Add to Cart
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RELATED DISHES -->
+<section class="py-5">
+  <div class="container">
+    <div class="section-title text-center mb-5">
+      <h2>Related Dishes</h2>
+      <p>You may also love these</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card menu-card">
+          <img src="assests/images/class-burger.jfif">
+          <div class="card-body text-center">
+            <h5>Classic Burger</h5>
+            <p>$8.99</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card menu-card">
+          <img src="assests/images/spaghetti-pasta-3.jfif">
+          <div class="card-body text-center">
+            <h5>Spaghetti Pasta</h5>
+            <p>$10.99</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card menu-card">
+          <img src="assests/images/veggie pizza.jfif">
+          <div class="card-body text-center">
+            <h5>Veggie Pizza</h5>
+            <p>$11.99</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="text-center py-4">
+  <p>&copy; 2026 MOMO Kitchens. All Rights Reserved.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const cards=document.querySelectorAll('.menu-card');
+window.addEventListener('scroll',()=>{
+  cards.forEach(card=>{
+    if(card.getBoundingClientRect().top < window.innerHeight-100){
+      card.style.opacity=1;
+      card.style.transform='translateY(0)';
+    }
+  });
+});
+</script>
+
+</body>
+</html>
