@@ -25,30 +25,7 @@ body {
   background:#0b0b0b; color:#fff;
 }
 
-/* Hero Video Section */
-.hero-video {
-  position: relative;
-  height: 70vh;
-  overflow: hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
-.hero-video video {
-  position:absolute;
-  top:0; left:0;
-  width:100%; height:100%;
-  object-fit:cover;
-  z-index:-1;
-  filter: brightness(0.5);
-}
-.hero-video h1 {
-  font-size:3rem;
-  color:#0ff;
-  text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
-  animation: neonPulse 1.5s infinite alternate;
-}
+
 
 /* Neon Pulse Animation */
 @keyframes neonPulse {
@@ -61,33 +38,146 @@ body {
 .section-title h2 { color:#0ff; text-shadow:0 0 5px #0ff,0 0 15px #0ff; }
 .section-title p { color:#ccc; }
 
-/* Team Cards */
-.team-card {
-  border-radius: 12px;
-  overflow:hidden;
-  box-shadow:0 10px 20px rgba(0,255,255,0.1);
-  transition: transform 0.4s, box-shadow 0.4s;
-  background:#111;
-  opacity:0;
-  transform: translateY(30px);
-}
-.team-card.visible { 
-  opacity:1; 
-  transform: translateY(0); 
-  transition: transform 0.6s ease, opacity 0.6s ease;
-}
-.team-card:hover {
-  transform: translateY(-10px);
-  box-shadow:0 20px 40px rgba(0,255,255,0.3);
-}
-.team-card img { width:100%; height:300px; object-fit:cover; transition: transform 0.4s; }
-.team-card:hover img { transform: scale(1.05); }
-.team-info { padding:20px; text-align:center; }
-.team-info h5 { font-weight:700; margin-bottom:5px; color:#0ff; text-shadow:0 0 5px #0ff,0 0 15px #0ff; }
-.team-info p { font-size:0.95rem; color:#aaa; }
-.team-social a { margin:0 8px; color:#0ff; transition: transform 0.3s, color 0.3s; position:relative; }
-.team-social a:hover { color:#fff; transform:scale(1.3); }
+/* ===============================
+   TEAM – RESPONSIVE FIX
+================================ */
 
+/* Card Base */
+.team-card {
+  background: #111;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,255,255,0.12);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Image */
+.team-img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+/* Card Content */
+.team-info {
+  padding: 18px;
+  text-align: center;
+}
+
+.team-info h5 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: #0ff;
+}
+
+.team-info p {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 12px;
+}
+
+/* Social Icons */
+.team-social a {
+  font-size: 0.9rem;
+  margin: 0 6px;
+  color: #0ff;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.team-social a:hover {
+  color: #fff;
+  transform: scale(1.2);
+}
+
+/* Desktop Hover Only */
+@media (hover: hover) {
+  .team-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,255,255,0.3);
+  }
+
+  .team-card:hover .team-img {
+    transform: scale(1.05);
+  }
+}
+
+/* ===============================
+   MOBILE OPTIMIZATION
+================================ */
+@media (max-width: 576px) {
+
+  .hero-video {
+    height: 50vh;
+  }
+
+  .hero-video h1 {
+    font-size: 1.9rem;
+  }
+
+  .team-img {
+    height: 200px;
+  }
+
+  .team-info {
+    padding: 14px;
+  }
+
+  .team-info h5 {
+    font-size: 1rem;
+  }
+
+  .team-info p {
+    font-size: 0.85rem;
+  }
+
+  /* Disable lift on touch */
+  .team-card {
+    transform: none !important;
+  }
+}
+    /* ===============================
+   HERO VIDEO – AUTOPLAY SAFE
+================================ */
+.hero-video {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-video-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.5);
+  z-index: -1;
+}
+
+/* Overlay text */
+.hero-overlay-content h1 {
+  color: #0ff;
+  font-size: 3rem;
+  text-shadow: 0 0 10px #0ff, 0 0 25px #0ff;
+}
+
+/* Mobile optimization */
+@media (max-width: 576px) {
+  .hero-video {
+    height: 50vh;
+  }
+
+  .hero-overlay-content h1 {
+    font-size: 1.9rem;
+  }
+}
 /* Navbar Neon & Active */
 .navbar .nav-link.active, .navbar .nav-link:hover { color:#0ff !important; text-shadow:0 0 5px #0ff,0 0 15px #0ff; }
 </style>
@@ -116,11 +206,22 @@ body {
 </nav>
 
 <!-- Hero Video Section -->
-<section class="hero-video p-5">
-  <video autoplay muted loop>
+<section class="hero-video">
+  <video
+    class="hero-video-bg"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+  >
     <source src="assests/videos/man-making-a-toast-.mp4" type="video/mp4">
+    Your browser does not support the video tag.
   </video>
-  <h1>Meet Our Talented Team</h1>
+
+  <div class="hero-overlay-content">
+    <h1>Meet Our Talented Team</h1>
+  </div>
 </section>
 
 <!-- Team Section -->
@@ -134,53 +235,62 @@ body {
     <div class="row g-4">
       
       <!-- Team Member 1 -->
-      <div class="col-md-4">
-        <div class="card team-card">
-          <img src="assests/images/chef-anto.avif" alt="Chef John">
-          <div class="team-info">
-            <h5>Chef John</h5>
-            <p>Head Chef</p>
-            <div class="team-social">
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
-          </div>
+      <div class="row g-4 justify-content-center">
+
+  <!-- Team Member -->
+  <div class="col-12 col-sm-6 col-lg-4">
+    <div class="card team-card h-100">
+      <img src="assests/images/chef-anto.avif" alt="Chef John" class="team-img">
+      <div class="team-info">
+        <h5>Chef John</h5>
+        <p>Head Chef</p>
+        <div class="team-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
         </div>
       </div>
+    </div>
+  </div>
 
-      <!-- Team Member 2 -->
-      <div class="col-md-4">
-        <div class="card team-card">
-          <img src="assests/images/chef-woman.avif" alt="Chef Emma">
-          <div class="team-info">
-            <h5>Chef Emma</h5>
-            <p>Pastry Chef</p>
-            <div class="team-social">
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
-          </div>
+   <!-- Team Member -->
+  <div class="col-12 col-sm-6 col-lg-4">
+    <div class="card team-card h-100">
+      <img src="assests/images/chef-woman.avif" alt="Chef John" class="team-img">
+      <div class="team-info">
+        <h5>Chef Puliyah</h5>
+        <p>Head Chef</p>
+        <div class="team-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
         </div>
       </div>
+    </div>
+  </div>
 
-      <!-- Team Member 3 -->
-      <div class="col-md-4">
-        <div class="card team-card">
-          <img src="assests/images/chef-lady.avif" alt="Chef Liam">
-          <div class="team-info">
-            <h5>Chef Liam</h5>
-            <p>Sous Chef</p>
-            <div class="team-social">
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
-          </div>
+
+   <!-- Team Member -->
+  <div class="col-12 col-sm-6 col-lg-4">
+    <div class="card team-card h-100">
+      <img src="assests/images/chef-lady.avif" alt="Chef John" class="team-img">
+      <div class="team-info">
+        <h5>Chef Nankabira</h5>
+        <p>Head Chef</p>
+        <div class="team-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
         </div>
       </div>
+    </div>
+  </div>
 
+
+
+
+  <!-- Repeat for others -->
+</div>
     </div>
   </div>
 </section>
@@ -213,6 +323,18 @@ document.addEventListener("DOMContentLoaded",()=>{
   };
   window.addEventListener('scroll', reveal);
   reveal();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const video = document.querySelector(".hero-video-bg");
+
+  if (video) {
+    video.muted = true;
+    video.play().catch(() => {
+      // Retry on user interaction (mobile safety)
+      document.addEventListener("touchstart", () => video.play(), { once: true });
+    });
+  }
 });
 </script>
 

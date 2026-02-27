@@ -22,7 +22,7 @@ body { font-family: 'Poppins', sans-serif; padding-top: 70px; background:#0b0b0b
   height: 100vh;
   overflow: hidden;
 }
-.hero-video video {
+.hero-video-bg {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -35,14 +35,14 @@ body { font-family: 'Poppins', sans-serif; padding-top: 70px; background:#0b0b0b
   object-fit: cover;
   filter: brightness(0.5);
 }
-.hero-video .hero-content {
+.hero-video .hero-overlay-content {
   position: relative;
   z-index: 2;
   text-align: center;
   top: 50%;
   transform: translateY(-50%);
 }
-.hero-video h1 {
+.hero-overlay-content h1 {
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 20px;
@@ -50,8 +50,8 @@ body { font-family: 'Poppins', sans-serif; padding-top: 70px; background:#0b0b0b
   text-shadow: 0 0 5px #0ff, 0 0 20px #0ff;
   animation: neonPulse 1.5s infinite alternate;
 }
-.hero-video p { font-size: 1.2rem; margin-bottom: 30px; text-shadow:0 0 5px #0ff; }
-.hero-video .btn {
+.hero-overlay-content p { font-size: 1.2rem; margin-bottom: 30px; text-shadow:0 0 5px #0ff; }
+.hero-overlay-content .btn {
   padding: 12px 40px;
   font-size: 1.1rem;
   transition: 0.3s;
@@ -60,9 +60,19 @@ body { font-family: 'Poppins', sans-serif; padding-top: 70px; background:#0b0b0b
   color:#000;
   font-weight:600;
 }
-.hero-video .btn:hover {
+.hero-overlay-content .btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 0 20px #0ff,0 0 40px #0ff;
+}
+/* Mobile optimization */
+@media (max-width: 576px) {
+  .hero-video {
+    height: 50vh;
+  }
+
+  .hero-overlay-content h1 {
+    font-size: 1.9rem;
+  }
 }
 
 /* Neon pulse */
@@ -132,11 +142,12 @@ body { font-family: 'Poppins', sans-serif; padding-top: 70px; background:#0b0b0b
 
 <!-- Hero Video Section -->
 <section class="hero-video">
-  <video autoplay muted loop>
+  <video class="hero-video-bg" autoplay muted loop playsinline
+    preload="auto">
     <source src="assests/videos/fries- video.mp4" type="video/mp4">
     Your browser does not support HTML5 video.
   </video>
-  <div class="hero-content">
+  <div class="hero-overlay-content">
     <h1>Fresh & Delicious Food</h1>
     <p>Enjoy your favorite dishes with fast delivery and online ordering</p>
     <a href="menu.html" class="btn">Order Now</a>
@@ -216,6 +227,18 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   window.addEventListener('scroll', reveal);
   reveal();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const video = document.querySelector(".hero-video-bg");
+
+  if (video) {
+    video.muted = true;
+    video.play().catch(() => {
+      // Retry on user interaction (mobile safety)
+      document.addEventListener("touchstart", () => video.play(), { once: true });
+    });
+  }
 });
 </script>
 

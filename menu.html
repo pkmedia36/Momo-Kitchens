@@ -103,7 +103,7 @@ body{
   height:80vh;
   overflow:hidden;
 }
-.hero-video video{
+.hero-video-bg{
   position:absolute;
   top:50%;
   left:50%;
@@ -112,12 +112,9 @@ body{
   transform:translate(-50%,-50%);
   object-fit:cover;
 }
-.hero-overlay{
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,.65);
-}
-.hero-content{
+
+
+.hero-overlay-content{
   position:relative;
   z-index:2;
   height:100%;
@@ -126,14 +123,24 @@ body{
   justify-content:center;
   text-align:center;
 }
-.hero-content h1{
+.hero-overlay-content h1{
   font-size:60px;
   font-weight:700;
   text-shadow:0 0 15px var(--primary);
 }
-.hero-content p{
+.hero-overlay-content p{
   font-size:20px;
   opacity:.85;
+}
+/* Mobile optimization */
+@media (max-width: 576px) {
+  .hero-video {
+    height: 50vh;
+  }
+
+  .hero-overlay-content h1 {
+    font-size: 1.9rem;
+  }
 }
 
 /* ================= CATEGORY BUTTONS ================= */
@@ -237,15 +244,20 @@ footer{
 
 <!-- ================= HERO SECTION ================= -->
 <section class="hero-video">
-  <video autoplay muted loop>
+  <video
+    class="hero-video-bg"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+  >
     <source src="assests/videos/fried beef -rice.mp4" type="video/mp4">
+    Your browser does not support the video tag.
   </video>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div>
-      <h1>Our Signature Menu</h1>
-      <p>Crafted with passion, served with flavor</p>
-    </div>
+
+  <div class="hero-overlay-content">
+    <h1>Meet Our Talented Team</h1>
   </div>
 </section>
 
@@ -497,6 +509,18 @@ addCartButtons.forEach(button => {
     // Redirect to cart page (optional)
     // window.location.href = 'cart.html';
   });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const video = document.querySelector(".hero-video-bg");
+
+  if (video) {
+    video.muted = true;
+    video.play().catch(() => {
+      // Retry on user interaction (mobile safety)
+      document.addEventListener("touchstart", () => video.play(), { once: true });
+    });
+  }
 });
 </script>
 
