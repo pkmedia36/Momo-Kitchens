@@ -3,152 +3,355 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shopping Cart – Momo</title>
+<title>Shopping Cart – MOMO</title>
 
-<!-- Bootstrap 5 -->
+<!-- Bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Font Awesome -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-<!-- Custom CSS -->
-<link rel="stylesheet" href="assets/css/style.css">
-
 
 <style>
-body { font-family: 'Poppins', sans-serif; padding-top: 70px; }
-.section-title { text-align: center; margin-bottom: 50px; }
-.table thead { background-color: #f8f9fa; }
-.table tbody tr:hover { background-color: #f1f1f1; transition: 0.3s; }
-.btn-update, .btn-remove { transition: 0.3s; }
-.btn-update:hover, .btn-remove:hover { transform: translateY(-3px); }
-.order-summary { border: 1px solid #ddd; padding: 20px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,.05); }
+/* ================= BASE ================= */
+body{
+  font-family:'Poppins',sans-serif;
+  background:#0b0b0b;
+  color:#fff;
+  padding-top:70px;
+}
+
+/* ================= NEON EFFECT ================= */
+.neon-text{
+  color:#0ff;
+  text-shadow:0 0 6px #0ff,0 0 18px #0ff;
+  animation:neonPulse 1.5s infinite alternate;
+}
+@keyframes neonPulse{
+  from{ text-shadow:0 0 6px #0ff; }
+  to{ text-shadow:0 0 22px #0ff; }
+}
+
+/* ================= CART CONTAINER ================= */
+.cart-box{
+  background:#111;
+  border-radius:16px;
+  padding:20px;
+  box-shadow:0 0 30px rgba(0,255,255,.15);
+}
+
+/* ================= TABLE (DESKTOP) ================= */
+.table{
+  color:#fff;
+}
+.table thead{
+  background:#0ff;
+  color:#000;
+}
+.table td,.table th{
+  vertical-align:middle;
+}
+
+/* ================= MOBILE CARD ================= */
+.cart-item{
+  background:#111;
+  border-radius:14px;
+  padding:15px;
+  box-shadow:0 0 20px rgba(0,255,255,.12);
+  margin-bottom:15px;
+  transition:transform .3s ease;
+}
+.cart-item:hover{
+  transform:translateY(-4px);
+}
+
+/* ================= INPUT ================= */
+.quantity{
+  background:#000;
+  border:1px solid #0ff;
+  color:#0ff;
+  text-align:center;
+}
+
+/* ================= BUTTONS ================= */
+.btn-neon{
+  border:1px solid #0ff;
+  color:#0ff;
+  background:transparent;
+  transition:.3s;
+}
+.btn-neon:hover{
+  background:#0ff;
+  color:#000;
+  box-shadow:0 0 20px #0ff;
+}
+
+/* ================= SUMMARY ================= */
+.order-summary{
+  background:#111;
+  border-radius:16px;
+  padding:25px;
+  box-shadow:0 0 30px rgba(0,255,255,.2);
+}
+.order-summary h4{
+  margin-bottom:15px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:768px){
+  .desktop-cart{ display:none; }
+}
+@media(min-width:769px){
+  .mobile-cart{ display:none; }
+}
+
+
+/* ================= NEON NAVBAR ================= */
+.neon-navbar{
+  background:rgba(0,0,0,.85);
+  backdrop-filter:blur(10px);
+  box-shadow:0 0 25px rgba(0,255,255,.2);
+  transition:.3s ease;
+}
+
+/* Brand */
+.neon-brand{
+  color:#0ff !important;
+  font-size:1.6rem;
+  text-shadow:0 0 8px #0ff,0 0 22px #0ff;
+  animation:neonPulse 1.5s infinite alternate;
+}
+
+/* Links */
+.navbar-dark .nav-link{
+  color:#fff;
+  position:relative;
+  font-weight:500;
+  transition:.3s;
+}
+.navbar-dark .nav-link:hover,
+.navbar-dark .nav-link.active{
+  color:#0ff;
+  text-shadow:0 0 6px #0ff;
+}
+
+/* Cart badge */
+.cart-badge{
+  background:#0ff;
+  color:#000;
+  font-size:.7rem;
+  padding:2px 7px;
+  border-radius:20px;
+  margin-left:6px;
+  font-weight:700;
+}
+
+/* Checkout button */
+.btn-neon-nav{
+  border:1px solid #0ff;
+  color:#0ff;
+  padding:6px 16px;
+  border-radius:20px;
+  transition:.3s;
+}
+.btn-neon-nav:hover{
+  background:#0ff;
+  color:#000;
+  box-shadow:0 0 20px #0ff;
+}
+
+/* Toggler */
+.neon-toggler{
+  border:1px solid #0ff;
+}
+
+/* Animation */
+@keyframes neonPulse{
+  from{ text-shadow:0 0 8px #0ff; }
+  to{ text-shadow:0 0 30px #0ff; }
+}
+
+/* Mobile spacing */
+@media(max-width:768px){
+  .navbar-nav{
+    padding-top:15px;
+  }
+}
 </style>
 </head>
+
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+  <!-- PRO NEON NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark neon-navbar fixed-top">
   <div class="container">
-    <a class="navbar-brand fw-bold" href="index.html">MOMO</a>
-    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+
+    <!-- Brand -->
+    <a class="navbar-brand neon-brand fw-bold" href="index.html">
+      MOMO Kitchens
+    </a>
+
+    <!-- Toggler -->
+    <button class="navbar-toggler neon-toggler" type="button"
+      data-bs-toggle="collapse" data-bs-target="#momoNav">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="nav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
-        <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
-        <li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>
-        <li class="nav-item"><a class="nav-link" href="checkout.html">Checkout</a></li>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="momoNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+        <li class="nav-item">
+          <a class="nav-link" href="menu.html">Menu</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active" href="cart.html">
+            Cart
+            <span class="cart-badge" id="cartCount">0</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="btn btn-neon-nav ms-lg-3" href="checkout.html">
+            Checkout
+          </a>
+        </li>
       </ul>
     </div>
+
   </div>
 </nav>
 
-<!-- Cart Section -->
-<section class="section py-5">
-  <div class="container">
-    <div class="section-title">
-      <h2>Your Shopping Cart</h2>
-    </div>
-    <div class="row g-4">
 
-      <!-- Cart Items Table -->
-      <div class="col-lg-8">
-        <div class="table-responsive">
-          <table class="table align-middle">
-            <thead>
-              <tr>
-                <th scope="col">Item</th>
-                <th scope="col">Price</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Subtotal</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody id="cart-items">
-              <tr>
-                <td>Italian Pizza</td>
-                <td>$12.99</td>
-                <td><input type="number" class="form-control quantity" value="1" min="1"></td>
-                <td class="subtotal">$12.99</td>
-                <td>
-                  <button class="btn btn-sm btn-outline-primary btn-update"><i class="fas fa-sync-alt"></i></button>
-                  <button class="btn btn-sm btn-outline-danger btn-remove"><i class="fas fa-trash"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td>Classic Burger</td>
-                <td>$8.99</td>
-                <td><input type="number" class="form-control quantity" value="2" min="1"></td>
-                <td class="subtotal">$17.98</td>
-                <td>
-                  <button class="btn btn-sm btn-outline-primary btn-update"><i class="fas fa-sync-alt"></i></button>
-                  <button class="btn btn-sm btn-outline-danger btn-remove"><i class="fas fa-trash"></i></button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+
+<!-- CART -->
+<section class="py-5">
+<div class="container">
+
+  <h2 class="text-center neon-text mb-5">Your Shopping Cart</h2>
+
+  <div class="row g-4">
+    
+    <!-- CART ITEMS -->
+    <div class="col-lg-8">
+
+      <!-- DESKTOP TABLE -->
+      <div class="cart-box desktop-cart">
+        <table class="table align-middle">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Price</th>
+              <th>Qty</th>
+              <th>Subtotal</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="cart-items">
+            <tr>
+              <td>Italian Pizza</td>
+              <td data-price="12.99">$12.99</td>
+              <td><input type="number" class="form-control quantity" value="1" min="1"></td>
+              <td class="subtotal">$12.99</td>
+              <td><button class="btn btn-sm btn-neon remove"><i class="fas fa-trash"></i></button></td>
+            </tr>
+            <tr>
+              <td>Classic Burger</td>
+              <td data-price="8.99">$8.99</td>
+              <td><input type="number" class="form-control quantity" value="2" min="1"></td>
+              <td class="subtotal">$17.98</td>
+              <td><button class="btn btn-sm btn-neon remove"><i class="fas fa-trash"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- MOBILE CARDS -->
+      <div class="mobile-cart">
+        <div class="cart-item">
+          <h6 class="neon-text">Italian Pizza</h6>
+          <p>$12.99</p>
+          <input type="number" class="form-control quantity" value="1" min="1">
+        </div>
+        <div class="cart-item">
+          <h6 class="neon-text">Classic Burger</h6>
+          <p>$8.99</p>
+          <input type="number" class="form-control quantity" value="2" min="1">
         </div>
       </div>
 
-      <!-- Order Summary -->
-      <div class="col-lg-4">
-        <div class="order-summary">
-          <h4>Order Summary</h4>
-          <p>Subtotal: <span id="order-subtotal">$30.97</span></p>
-          <p>Delivery: <span id="order-delivery">$3.00</span></p>
-          <hr>
-          <h5>Total: <span id="order-total">$33.97</span></h5>
-          <a href="checkout.html" class="btn btn-primary w-100 mt-3">Proceed to Checkout</a>
-        </div>
-      </div>
-
     </div>
+
+    <!-- SUMMARY -->
+    <div class="col-lg-4">
+      <div class="order-summary">
+        <h4 class="neon-text">Order Summary</h4>
+        <p>Subtotal: <span id="order-subtotal">$0.00</span></p>
+        <p>Delivery: $3.00</p>
+        <hr>
+        <h5>Total: <span id="order-total">$0.00</span></h5>
+        <a href="checkout.html" class="btn btn-neon w-100 mt-3">Checkout</a>
+      </div>
+    </div>
+
   </div>
+</div>
 </section>
 
-<footer class="footer bg-dark text-light text-center py-4">
-  <p>&copy; 2026 MOMO. All Rights Reserved.</p>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+<!-- JS -->
 <script>
-// Update subtotal and total dynamically
-function updateTotals() {
-  const rows = document.querySelectorAll('#cart-items tr');
-  let subtotal = 0;
-  rows.forEach(row => {
-    const price = parseFloat(row.cells[1].innerText.replace('$',''));
-    const qty = parseInt(row.querySelector('.quantity').value);
-    const rowSubtotal = (price * qty).toFixed(2);
-    row.querySelector('.subtotal').innerText = '$' + rowSubtotal;
-    subtotal += parseFloat(rowSubtotal);
+function updateTotals(){
+  let subtotal=0;
+  document.querySelectorAll('#cart-items tr').forEach(row=>{
+    const price=parseFloat(row.querySelector('td[data-price]').dataset.price);
+    const qty=row.querySelector('.quantity').value;
+    const total=(price*qty).toFixed(2);
+    row.querySelector('.subtotal').innerText='$'+total;
+    subtotal+=parseFloat(total);
   });
-  const delivery = 3.00;
-  document.getElementById('order-subtotal').innerText = '$' + subtotal.toFixed(2);
-  document.getElementById('order-total').innerText = '$' + (subtotal + delivery).toFixed(2);
+  document.getElementById('order-subtotal').innerText='$'+subtotal.toFixed(2);
+  document.getElementById('order-total').innerText='$'+(subtotal+3).toFixed(2);
 }
 
-// Event listeners
-document.querySelectorAll('.btn-update').forEach(btn => {
-  btn.addEventListener('click', updateTotals);
+document.addEventListener('input',e=>{
+  if(e.target.classList.contains('quantity')) updateTotals();
 });
-document.querySelectorAll('.quantity').forEach(input => {
-  input.addEventListener('change', updateTotals);
-});
-document.querySelectorAll('.btn-remove').forEach(btn => {
-  btn.addEventListener('click', e => {
+
+document.addEventListener('click',e=>{
+  if(e.target.closest('.remove')){
     e.target.closest('tr').remove();
     updateTotals();
-  });
+  }
 });
 
-// Initialize totals
 updateTotals();
+
+
+/* ================= ACTIVE PAGE ================= */
+document.querySelectorAll('.nav-link').forEach(link=>{
+  if(link.href === window.location.href){
+    link.classList.add('active');
+  }
+});
+
+/* ================= CART COUNT ================= */
+const cart = JSON.parse(localStorage.getItem('momoCart')) || [];
+const cartCount = document.getElementById('cartCount');
+
+if(cartCount){
+  cartCount.textContent = cart.reduce((t,i)=>t+i.qty,0);
+}
+
+/* ================= SCROLL EFFECT ================= */
+window.addEventListener('scroll',()=>{
+  const nav = document.querySelector('.neon-navbar');
+  nav.style.boxShadow = window.scrollY > 20
+    ? '0 0 35px rgba(0,255,255,.35)'
+    : '0 0 25px rgba(0,255,255,.2)';
+});
+
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
